@@ -7,7 +7,7 @@ public class Trigger : MonoBehaviour {
 	// has this object been activated	
 	protected bool activated = false;
 
-	void Update() {
+	public virtual void Update() {
 		if (Input.GetMouseButtonDown(0) && gameObject == Selectable.CurrentSelection) {
 			if (activated) {
 				Deactivate();
