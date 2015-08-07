@@ -1,7 +1,12 @@
 ﻿Shader "Custom/MousePointerShader" {
     SubShader {
     	// Rendering Settings
-    	Lighting Off Cull Off ZTest Always ZWrite Off Fog { Mode Off }
+    	Tags {"Queue" = "Overlay" }
+    	Lighting Off
+    	Cull Off
+    	ZTest Always 
+    	ZWrite Off
+    	Fog { Mode Off }
 
         Pass {
             CGPROGRAM

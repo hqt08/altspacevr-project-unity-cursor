@@ -70,7 +70,7 @@ public class SphericalCursorModule : MonoBehaviour {
 
 			// Modify the cursor size based on distance
 			float distanceToObject = (cursorHit.point - transform.position).magnitude;
-			float scaleFactor = (distanceToObject / MaxDistance * DistanceScaleFactor + 1.0f) / 2.0f;
+			float scaleFactor = (distanceToObject * DistanceScaleFactor + 1.0f) / 2.0f;
 			cursor.transform.localScale = DefaultCursorScale * scaleFactor;
 		}
 		else
