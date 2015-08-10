@@ -56,25 +56,23 @@ For this part of the project, please **do not** include 3rd party code. You can 
 
 # Part 2 - Enhancements
 
-Now that you have a working cursor, and can point at and select objects, now build some functionality that might be fun in VR that showcases your skills and creativity. This is the open ended part of the project, and is your chance to blow us away! 
+There are 3 main enhancements done to the project:
 
-Some potential ideas:
+## 1) Calculation of Spherical Coordinates from First Principles.
 
-- Use the cursor to manipulate objects, and add multiplayer!
+Besides using the basic method of projecting the vector from camera to mouse position to get the right cursor position, I was interested in creating a custom spherical coordinates class (MouseHandler.cs) such that there is full control over the polar coordinates calculation and it is easier to extend it in the future. It essentially provides a utility method to convert cartesian to polar coordinates for the given radius, polar angle and azimuth angle. This method of calculation can be toggled on and off using the public variable UseSphericalCalculation in the scene.
 
-- Improve the cursor to be more usable.
+## 2) Mini Obstacle Course Game
 
-- Add some custom shaders, behaviors, or effects to objects to show off your graphics chops.
+The idea was to integrate the user in a obstacle course game that only appears (somewhat unexpectedly) when switching off the lights. The use of sound was quite critical in the game to create the right effect. Upon losing the game, the idea was for the user to return to his normal state on the sofa as if woken up from a dream. The movement design could be further improved to prevent less motion-sickness - at least the user can switch on the lights at any point of the game to return to his comfortable living room!
 
-- Add a control scheme or widgets that let the user do stuff with objects.
+## 3) Pick up / Rearrage Furniture
 
-- Create some kind of interactive game.
-
-- Anything you want! Got some new Unity technique you want to try? Use this as an excuse! Don’t feel limited by the sample scene, feel free to create a new scene and leverage your cursor code in some novel way.
-
-Feel free to use 3rd party code or assets for this part of the project, keeping in mind our assessment criteria (noted at the top of the README.)
+For completion, a simple click and drop script was added for the rest of the furniture objects (besides the lamp) to allow the user to pick up and rearrage the furniture as he pleases.
 
 ## Deliverable
+
+The Mac/PC builds can be found in the folder Builds/Demo Builds.
 
 In your repo, you should clobber this README file with your own describing your project. Any instructions or known issues should be documented in the README as well.
 
