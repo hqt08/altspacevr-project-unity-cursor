@@ -9,6 +9,9 @@ public class SphericalCursorModule : MonoBehaviour {
 
 	// This is a scale factor that determines how much to scale down the cursor based on its collision distance.
 	public float DistanceScaleFactor;
+
+	// This is a toggle for whether we want spherical coordinate calculation for this example.
+	public bool UseSphericalCalculation;
 	
 	// This is the layer mask to use when performing the ray cast for the objects.
 	// The furniture in the room is in layer 8, everything else is not.
@@ -41,18 +44,22 @@ public class SphericalCursorModule : MonoBehaviour {
 		GameObject cursor = GameObject.Find("Cursor");
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		Vector3 direction = ray.direction.normalized;
-		cursor.transform.position = transform.position + direction * SphereRadius;
 
-		/* Spherical Coordinates Calculation From First Principles */	
-		// Find the polar and azimuth angles from this ray direction
-//		float polar = Vector3.Angle(Vector3.up, direction); // polar won't go beyond 180 degrees
-//		Vector3 directionAzimuth = new Vector3(direction.x, 0f, direction.z);
-//		float azimuth = Vector3.Angle(Vector3.forward, directionAzimuth); // azimuth need to calculate in 360 degrees
-//		float sign = Mathf.Sign(Vector3.Dot(Vector3.up, Vector3.Cross(Vector3.forward, directionAzimuth)));
-//		azimuth = sign * azimuth;
-//		// Update Mouse Handler
-//		MouseHandler.Instance.UpdateSphericalCoordinates(SphereRadius, azimuth, polar);
-//		cursor.transform.position = transform.position + MouseHandler.Instance.SphericalToCartesian();
+		if (UseSphericalCalculation) {
+			/* Spherical Coordinates Calculation From First Principles */	
+			// Find the polar and azimuth angles from this ray direction
+			float polar = Vector3.Angle(Vector3.up, direction); // polar won't go beyond 180 degrees
+			Vector3 directionAzimuth = new Vector3(direction.x, 0f, direction.z);
+			float azimuth = Vector3.Angle(Vector3.forward, directionAzimuth); // azimuth need to calculate in 360 degrees
+			float sign = Mathf.Sign(Vector3.Dot(Vector3.up, Vector3.Cross(Vector3.forward, directionAzimuth)));
+			azimuth = sign * azimuth;
+			// Update Mouse Handler
+			MouseHandler.Instance.UpdateSphericalCoordinates(SphereRadius, azimuth, polar);
+			cursor.transform.position = transform.position + MouseHandler.Instance.SphericalToCartesian();
+		} else {
+			/* Regular Projection Method */
+			cursor.transform.position = transform.position + direction * SphereRadius;
+		}
 
 		// TODO: Perform ray cast to find object cursor is pointing at.
 		// TODO: Update cursor transform.
